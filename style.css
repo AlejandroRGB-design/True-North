@@ -1,0 +1,126 @@
+/* --- Estilos Generales --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(180deg, #e2e1e9 0%, #302685 40%, #03002e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* --- Cabecera (Íconos en las esquinas) --- */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+header button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* --- Sección del Logo --- */
+.logo-section {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.logo-section h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+    color: #000000; /* Negro como en la imagen */
+    margin-top: 10px;
+}
+
+.star-icon {
+    font-size: 2.5rem;
+    color: #000000;
+}
+
+/* --- Navegación (Menú Horizontal) --- */
+nav {
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+nav a, nav strong {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    padding: 8px 20px;
+    display: inline-block;
+}
+
+/* Estado seleccionado (Professional Skills) */
+nav strong {
+    background-color: #1a191d;
+    color: #ffffff;
+    border-radius: 20px;
+    font-weight: 400;
+}
+
+/* --- Imagen Ajustada --- */
+.hero-image {
+    width: 100%;
+    max-width: 750px;
+    height: auto;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* --- Textos de Contenido --- */
+.content-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 700px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+
+.welcome-text {
+    font-size: 1.6rem;
+    line-height: 1.4;
+    max-width: 700px;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: 20px;
+}
