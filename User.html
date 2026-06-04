@@ -40,16 +40,11 @@
 
         <!-- Contenedor Principal estilo Apple Glassmorphism (Tu bloque anterior) -->
         <section class="apple-glass-card">
-            <div class="profile-avatar-container">
-    <input type="file" id="avatar-input" accept="image/*" style="display: none;">
-    
-    <button type="button" id="avatar-button" class="circle-button" title="Cambiar foto de perfil" style="--bg-image: url('Photos/user icon.png');">
-        <div class="profile-avatar-container">
-    <input type="file" id="avatar-input" accept="image/*" style="display: none;">
-    
-    <button type="button" id="avatar-button" class="user-avatar-circle" title="Cambiar foto de perfil" style="--bg-image: url('Photos/user icon.png');">
+           <div class="profile-avatar-container">
+    <button id="avatar-button" class="user-avatar-circle" title="Cambiar foto de perfil">
+        <img src="Photos/user icon.png" alt="Avatar" id="avatar-img-fallback" style="display: none;">
     </button>
-</div>
+    <input type="file" id="avatar-input" accept="image/*" style="display: none;">
     </button>
 </div>
 
