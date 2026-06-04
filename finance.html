@@ -10,15 +10,13 @@
 
     <header>
         <header>
-    <a href="index.html" class="corner-btn left-btn" title="Ir al Inicio">
-        <img src="Photos/1946436.png" alt="Icono Izquierdo">
+    <a href="User.html" class="corner-btn left-btn" title="Ir al Inicio">
+        <img src="Photos/user.png" alt="Icono Izquierdo">
     </a>
 
 
 
-    <a href="professional-skills.html" class="corner-btn right-btn" title="Ver Habilidades">
-        <img src="Photos/1077035.png" alt="Icono Derecho">
-    </a>
+    
 </header>
     </header>
 
@@ -37,12 +35,14 @@
         </nav>
 
         <!-- Busca esta sección en tus páginas y añade el span con el texto -->
-<section>
-    <a href="index.html" class="image-button">
-        <img src="Photos/finance.jpg" alt="Cosas de dinero" class="hero-image">
-        <span class="hover-text">Access Content</span>
-    </a>
-</section>
+<!-- Busca esta sección en tus páginas y añade el span con el texto -->
+        <section>
+            <!-- CAMBIAR EL href="index.html" POR EL NOMBRE DE LA PÁGINA DE CONTENIDOS -->
+            <a href="finance content.html" class="image-button">
+                <img src="Photos/finance.jpg" alt="Cosas de dinero" class="hero-image">
+                <span class="hover-text">Access Content</span>
+            </a>
+        </section>
 
         <section>
             <p class="content-text">
@@ -50,6 +50,15 @@
             </p>
         </section>
     </main>
+
+    <script>
+    document.querySelectorAll('.rectangle-button, .circle-button').forEach(element => {
+        element.addEventListener('click', () => {
+            let clicks = parseInt(localStorage.getItem('tn_clicks_finance') || '0');
+            localStorage.setItem('tn_clicks_finance', clicks + 1);
+        });
+    });
+</script>
 
 </body>
 </html>

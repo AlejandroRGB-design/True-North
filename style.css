@@ -458,17 +458,56 @@ a.image-button:hover .hover-text {
     text-align: center;
 }
 
-/* --- El Botón Rectangular Interactiva (Actualizado) --- */
+/* --- El Botón Rectangular Interactiva (Actualizado con imagen trasera en Hover) --- */
 .rectangle-button {
     display: block;
     width: 100%;
-    height: 200px;        /* Proporción estilizada vertical */
+    height: 200px;        
     border-radius: 16px;
-    background-color: #ffffff; /* Fondo completamente blanco pedido */
-    border: 3px solid #d63384; /* Pequeño marco morado-rosado */
+    background-color: #ffffff; /* Fondo completamente blanco */
+    border: 3px solid #d63384; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    
+    /* Requerido para posicionar la imagen absoluta ::before por detrás */
+    position: relative;
     overflow: hidden;
+    z-index: 1;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Pseudo-elemento oculto que maneja la imagen en opacidad baja trasera */
+.rectangle-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Llama a la variable --bg-image definida de forma individual en el HTML */
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Estado inicial: invisible y escala reducida */
+    opacity: 0;
+    transform: scale(1.1);
+    
+    /* Capa inferior interna para quedar por detrás del icono */
+    z-index: -1; 
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Contenedor interno para centrar el icono */
+.card-inner-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; 
+    z-index: 2; /* Asegura que el icono quede al frente */
 }
 
 /* Contenedor interno para centrar el nuevo icono */
@@ -493,11 +532,31 @@ a.image-button:hover .hover-text {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* --- Efecto de Interacción (Hover) --- */
+/* --- EFECTO INTERACTIVO HOVER (Actualizado) --- */
 .rectangle-button:hover {
-    transform: translateY(-8px); /* Eleva la tarjeta */
-    border-color: #e03391;       /* El marco se vuelve sutilmente más brillante */
+    transform: translateY(-8px); 
+    border-color: #e03391;       
     box-shadow: 0 15px 30px rgba(214, 51, 132, 0.35), 0 0 15px rgba(214, 51, 132, 0.1);
+}
+
+/* EFECTO NUEVO: Al pasar el ratón, se muestra la imagen trasera en baja opacidad */
+.rectangle-button:hover::before {
+    opacity: 0.18; /* Opacidad baja ideal para mantener la legibilidad del icono y el fondo blanco */
+    transform: scale(1); /* Efecto suave de zoom hacia atrás */
+}
+
+/* --- ADAPTACIÓN DE HOVER PARA LAS TARJETAS DE VIDEO --- */
+.rectangle-button.video-card:hover {
+    border-color: #b78cf7; 
+    box-shadow: 0 15px 30px rgba(163, 112, 247, 0.35), 0 0 15px rgba(163, 112, 247, 0.1);
+}
+
+/* --- ADAPTACIÓN PARA LOS CUADROS DESACTIVADOS (Coming Soon) --- */
+/* Bloqueamos el pseudo-elemento en las tarjetas inactivas para que no muestren imagen */
+.rectangle-button.card-disabled::before,
+.rectangle-button.card-disabled:hover::before {
+    opacity: 0 !important;
+    display: none;
 }
 
 /* El icono reacciona ligeramente al pasar el cursor sobre el cuadro */
@@ -650,14 +709,6 @@ a.image-button:hover .hover-text {
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease;
 }
 
-.section-title-videos:hover {
-    transform: scale(1.03) translateX(5px);
-    /* Aura adaptada: destello blanco y morado violeta */
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.8), 
-        0 0 18px rgba(163, 112, 247, 0.7),  
-        0 0 25px rgba(181, 37, 126, 0.4);  
-}
 
 /* Modificación de marco para las tarjetas de video (Tono Morado-Violeta) */
 .rectangle-button.video-card {
@@ -680,3 +731,458 @@ a.image-button:hover .hover-text {
     filter: invert(60%) sepia(90%) saturate(2000%) hue-rotate(224deg) brightness(102%) contrast(98%);
 }
 
+/* --- ADAPTACIÓN DE "COMING SOON" PARA LA SECCIÓN DE VIDEOS --- */
+
+/* Mantiene el marco morado-violeta original fijo en el cuadro bloqueado de videos */
+.rectangle-button.video-card.card-disabled,
+.rectangle-button.video-card.card-disabled:hover {
+    border-color: #a370f7; /* Tono morado-violeta */
+    transform: none; /* Evita que se eleve en hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Sombra base estática */
+}
+
+/* Modifica el subrayado del texto "Coming Soon" dentro de videos para usar el color violeta */
+.overlay-video span {
+    border-bottom: 2px solid #a370f7;
+}
+
+/* Evita que el icono de Youtube crezca o cambie de color al pasar el mouse por encima */
+.rectangle-button.video-card.card-disabled:hover .card-icon.video-icon {
+    transform: none;
+    /* Mantiene el filtro del color de la sección videos pero con opacidad baja */
+    filter: invert(53%) sepia(81%) saturate(1469%) hue-rotate(224deg) brightness(99%) contrast(98%);
+    opacity: 0.5;
+}
+
+/* ================= ESTILOS PARA LA SECCIÓN DE REDES SOCIALES ================= */
+
+/* Título de la sección Social Media */
+.section-title-social {
+    font-family: ciclo-display, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: left;
+    width: 100%;
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease;
+}
+
+
+/* Contenedor horizontal para las redes sociales */
+.social-media-wrapper {
+    width: 100%;
+    padding: 10px;
+    text-align: left; /* Alinea los bloques al inicio */
+    white-space: nowrap; /* Mantiene la fila horizontal si es necesario */
+    overflow-x: auto;
+}
+
+/* Cada bloque individual de red social */
+.social-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 40px; /* Espaciado generoso entre cuentas */
+    text-align: center; /* Centra el círculo y el texto */
+}
+
+/* El Botón Circular */
+.circle-button {
+    display: block;
+    width: 110px;       /* Tamaño de círculo perfecto y elegante */
+    height: 110px;
+    border-radius: 50%; /* Hace que el cuadro sea completamente redondo */
+    background-color: #ffffff; /* Fondo blanco pedido */
+    border: 3px solid #8fa4ff; /* Tono morado-azul claro distinto a los anteriores */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    margin: 0 auto 12px auto; /* Centra el círculo y deja espacio al texto inferior */
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Contenedor interno del círculo */
+.circle-inner-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+/* Iconos dentro de los círculos */
+.social-icon {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    opacity: 0.9;
+    /* Filtro para transformar el icono negro a un tono azul morado suave que combine con el marco */
+    filter: invert(71%) sepia(35%) saturate(950%) hue-rotate(195deg) brightness(101%) contrast(101%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Espacio de información debajo del círculo */
+.social-info {
+    white-space: normal; /* Permite que el texto se comporte normal */
+}
+
+.social-platform {
+    font-family: forma-djr-deck, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.social-handle {
+    font-family: forma-djr-deck, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #8fa4ff; /* El texto de la cuenta usa el color del marco */
+    transition: color 0.3s ease;
+}
+
+/* Interacción Hover del Círculo */
+.circle-button:hover {
+    transform: scale(1.08) translateY(-4px); /* Se expande y se eleva levemente */
+    border-color: #b3c2ff; /* El marco brilla un poco más */
+    box-shadow: 0 12px 25px rgba(143, 164, 255, 0.35);
+}
+
+.circle-button:hover .social-icon {
+    transform: scale(1.1);
+    filter: invert(80%) sepia(40%) saturate(1200%) hue-rotate(195deg) brightness(105%) contrast(101%);
+}
+
+.social-item:hover .social-handle {
+    color: #ffffff; /* Al posar el mouse en el elemento, la cuenta se ilumina */
+}
+
+/* ================= SECCIÓN PERFIL ESTILO APPLE (GLASSMORPHISM) ================= */
+
+/* Contenedor principal de cristal */
+.apple-glass-card {
+    width: 100%;
+    max-width: 1200px; /* Ocupa casi todo el largo de la página alineado con tu 'main' */
+    margin: 40px auto;
+    padding: 40px;
+    display: flex;
+    flex-direction: row; /* Distribución horizontal: imagen izquierda, contenido derecha */
+    align-items: center;
+    gap: 40px;
+    
+    /* Efecto Apple Glassmorphism */
+    background-color: rgba(15, 14, 18, 0.45); /* Color un poco más oscuro y translúcido */
+    backdrop-filter: blur(20px) saturate(160%); /* Distorsiona y embellece el fondo radial */
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    
+    /* Borde fino y elegante tipo cristal */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px; /* Esquinas redondeadas suaves estilo iOS */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Adaptación responsive para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .apple-glass-card {
+        flex-direction: column; /* Se vuelve vertical en móviles */
+        padding: 25px;
+        text-align: center;
+    }
+}
+
+/* --- LADO IZQUIERDO: Contenedor del Círculo de Imagen --- */
+.profile-image-container {
+    flex-shrink: 0; /* Evita que el círculo se deforme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circular-avatar {
+    width: 180px;  /* Tamaño idóneo para la foto de perfil */
+    height: 180px;
+    border-radius: 50%; /* Cuadro completamente redondo */
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 3px solid rgba(214, 51, 132, 0.6); /* Borde sutil con el morado rosa de tu marca */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(181, 37, 126, 0.2);
+    overflow: hidden; /* Corta la imagen en forma de círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.circular-avatar:hover {
+    transform: scale(1.03);
+    border-color: #d63384; /* Se ilumina al pasar el cursor */
+}
+
+.circular-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Hace que cualquier imagen se adapte perfectamente al círculo */
+}
+
+/* --- LADO DERECHO: Título e Información --- */
+.profile-info-container {
+    flex-grow: 1; /* Ocupa todo el espacio restante a lo largo */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Título de la sección con tipografía Ciclo */
+.glass-section-title {
+    font-family: ciclo-display, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2rem; /* Tamaño más pequeño que el H1 principal */
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Formulario contenedor de los inputs */
+.info-inputs-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.info-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.field-label {
+    font-family: forma-djr-deck, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #d6b4fc; /* Tono morado claro para mantener tu identidad visual */
+    padding-left: 5px;
+}
+
+/* Rectángulos extendidos donde se introduce la información */
+.info-rectangle-input {
+    width: 100%;
+    min-height: 80px; /* Altura idónea para escribir varias líneas */
+    padding: 14px 18px;
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo oscuro para contrastar con el cristal */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    
+    /* Estilos de Texto */
+    font-family: forma-djr-deck, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.4;
+    
+    resize: vertical; /* Permite al usuario agrandar el cuadro hacia abajo si lo necesita */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efecto Focus al hacer click para escribir */
+.info-rectangle-input:focus {
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-color: rgba(163, 112, 247, 0.6); /* Brillo violeta sutil al activarse */
+    box-shadow: 0 0 12px rgba(163, 112, 247, 0.2);
+}
+
+/* Botón de guardar integrado en el diseño */
+.save-glass-btn {
+    align-self: flex-end; /* Lo alinea a la derecha del contenedor */
+    font-family: ciclo-display, sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: rgba(214, 51, 132, 0.2);
+    border: 1.5px solid #d63384;
+    padding: 10px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 5px;
+}
+
+.save-glass-btn:hover {
+    background-color: rgba(214, 51, 132, 0.4);
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(214, 51, 132, 0.3);
+}
+
+.save-glass-btn:active {
+    transform: scale(0.97); /* Efecto físico de hundimiento al clickar */
+}
+
+/* ================= LOGOTIPO ESCALADO PARA PÁGINAS SECUNDARIAS ================= */
+.logo-user-scaled {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.logo-user-scaled .star-icon {
+    width: 65px; /* Reducido de 110px para que no rompa la estructura superior */
+    height: 65px;
+}
+
+.logo-user-scaled h1 {
+    font-size: 2.2rem; /* Reducido de 4rem, compacto y elegante */
+    margin-top: 5px;
+}
+
+/* ================= BARRA DE PROGRESO ESTILO VIDRIO LÍQUIDO ================= */
+.liquid-glass-progress-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto 10px auto;
+    padding: 24px 30px;
+    background-color: rgba(26, 25, 29, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.progress-title {
+    font-family: ciclo-display, sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+}
+
+.progress-badge {
+    font-family: forma-djr-deck, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* El carril contenedor transparente/esmerilado */
+.liquid-glass-track {
+    width: 100%;
+    height: 22px; /* Espesor adecuado para apreciar el fluido líquido */
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    padding: 3px;
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+/* El fluido líquido que avanza */
+.liquid-glass-fill {
+    height: 100%;
+    width: 0%; /* Cambia dinámicamente vía JavaScript */
+    border-radius: 50px;
+    background: linear-gradient(90deg, #b5257e, #d6b4fc); /* Tono por defecto */
+    box-shadow: 0 0 15px rgba(181, 37, 126, 0.5), inset 0 -4px 10px rgba(0,0,0,0.3);
+    position: relative;
+    transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Reflejo de luz blanca superior en el líquido (Efecto Vidrio Líquido / Glare) */
+.liquid-glare {
+    position: absolute;
+    top: 1px;
+    left: 5%;
+    right: 5%;
+    height: 35%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 20px;
+}
+
+/* Bloque inferior de contadores detallados */
+.category-counters {
+    display: flex;
+    gap: 25px;
+    margin-top: 15px;
+    justify-content: flex-start;
+}
+
+.counter-tag {
+    font-family: forma-djr-deck, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Colores de etiquetas consistentes con los marcos de tus secciones */
+.text-health strong { color: #d63384; }
+.text-professional strong { color: #a370f7; }
+.text-finance strong { color: #8fa4ff; }
+
+/* Asegura que la imagen de fondo cubra todo el círculo y esté centrada */
+.circle-button {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    cursor: pointer; /* Muestra la mano al pasar el mouse */
+}
+
+/* Contenedor para centrar el avatar en tu panel */
+.profile-avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0; /* Espaciado arriba y abajo del círculo */
+}
+
+/* El nuevo círculo de usuario (Más grande y responsivo) */
+.user-avatar-circle {
+    width: 150px;  /* Cambia este valor si lo quieres todavía más grande */
+    height: 150px; /* Debe ser igual al ancho para que sea un círculo perfecto */
+    border-radius: 50%;
+    
+    /* Configuración de la imagen de fondo */
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Estilos estéticos acordes al diseño retro/neon de tu página */
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(181, 37, 126, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: #1a1a1a; /* Fondo oscuro por si no carga la imagen */
+    
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efecto visual al pasar el mouse por encima */
+.user-avatar-circle:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 25px rgba(214, 51, 132, 0.8);
+}
