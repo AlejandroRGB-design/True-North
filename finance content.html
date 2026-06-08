@@ -264,6 +264,14 @@ Learn how to measure the risk and return of equity and debt</p>
 
 
     </main>
+    <script>
+document.querySelectorAll('.rectangle-button, .circle-button').forEach(element => {
+    element.addEventListener('click', () => {
+        let clicks = parseInt(localStorage.getItem('tn_clicks_finance') || '0');
+        localStorage.setItem('tn_clicks_finance', clicks + 1);
+    });
+});
+</script>
 
 </body>
 </html>

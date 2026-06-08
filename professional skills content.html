@@ -262,6 +262,14 @@
 
 
     </main>
+<script>
+document.querySelectorAll('.rectangle-button, .circle-button').forEach(element => {
+    element.addEventListener('click', () => {
+        let clicks = parseInt(localStorage.getItem('tn_clicks_professional') || '0');
+        localStorage.setItem('tn_clicks_professional', clicks + 1);
+    });
+});
+</script>
 
 </body>
 </html>

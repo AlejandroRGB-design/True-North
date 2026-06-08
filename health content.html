@@ -16,7 +16,7 @@
 
         <div class="header-right">
             <a href="User.html" class="corner-btn" title="Ir al Inicio">
-                <img src="Photos/User.png" alt="Icono Usuario">
+                <img src="Photos/user.png" alt="Icono Usuario">
             </a>
         
         </div>
@@ -226,6 +226,14 @@
 
 
     </main>
+    <script>
+document.querySelectorAll('.rectangle-button, .circle-button').forEach(element => {
+    element.addEventListener('click', () => {
+        let clicks = parseInt(localStorage.getItem('tn_clicks_health') || '0');
+        localStorage.setItem('tn_clicks_health', clicks + 1);
+    });
+});
+</script>
 
 </body>
 </html>
