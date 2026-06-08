@@ -1,1195 +1,679 @@
-/* --- Estilos Generales --- */
+/* ==========================================================================
+   TRUE NORTH - ESTÉTICA PREMIUM MINIMALISTA MONOCROMÁTICA DEIFINITIVA
+   ========================================================================== */
+
+/* --- Estilos Generales y Tipografía Minimalista --- */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* ==========================================================================
+   BODY CONFIGURADO CON ESTRELLAS TITILANTES ORGÁNICAS
+   ========================================================================== */
 body {
-    font-family: forma-djr-deck, sans-serif;
-font-style: normal;
-font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
     color: #ffffff;
     min-height: 100vh;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 
-    /* --- DEGRADADO AJUSTADO: MÁS NEGRO Y MORADO, MENOS BLANCO --- */
-    background-color: #000000;
-    background-image: radial-gradient(
-        circle at center bottom, 
-        #000000 0%, 
-        #000000 10%,    /* El negro puro se mantiene firme hasta el 40% */
-        #b5257e 40%,    /* Transición hacia un morado más vibrante e intenso */
-        #d6b4fc 70%,    /* El morado claro se expande casi hasta el final */
-        #ffffff 100%    /* El blanco queda reducido solo al borde superior */
-    );
+    /* Fondo base: Nebulosas ultra-tenues y degradado profundo */
+    background-color: #020202;
+    background-image: 
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 50%),
+        radial-gradient(circle at 15% 75%, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0) 40%),
+        linear-gradient(to bottom, #020202 0%, #070708 50%, #000000 100%);
     background-attachment: fixed;
 }
 
-/* --- Contenedor Principal --- */
+/* Capa de Estrellas Grupo A (Brillo constante y un par de destellos lentos) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.4) 100%, transparent),
+        radial-gradient(1px 1px at 75% 15%, rgba(255, 255, 255, 0.3) 100%, transparent),
+        radial-gradient(1px 1px at 50% 70%, rgba(255, 255, 255, 0.25) 100%, transparent),
+        radial-gradient(2px 2px at 85% 80%, rgba(255, 255, 255, 0.35) 100%, transparent);
+    
+    /* Animación cíclica muy suave y lenta */
+    animation: spaceTwinkleA 8s infinite ease-in-out;
+}
+
+/* Capa de Estrellas Grupo B (Titileo rápido e independiente) */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(1px 1px at 10% 65%, rgba(255, 255, 255, 0.3) 100%, transparent),
+        radial-gradient(1.5px 1.5px at 40% 15%, rgba(255, 255, 255, 0.45) 100%, transparent),
+        radial-gradient(1px 1px at 60% 85%, rgba(255, 255, 255, 0.2) 100%, transparent),
+        radial-gradient(1.5px 1.5px at 90% 35%, rgba(255, 255, 255, 0.35) 100%, transparent);
+    
+    /* Animación con tiempos y ritmo diferentes para romper la simetría */
+    animation: spaceTwinkleB 11s infinite ease-in-out;
+}
+
+/* --- ANIMACIONES DE TITILEO (EFECTO RELAJANTE) --- */
+
+@keyframes spaceTwinkleA {
+    0%, 100% { opacity: 0.8; }
+    40% { opacity: 0.4; }
+    45% { opacity: 0.9; } /* Un destello ligero y vuelve a bajar */
+    80% { opacity: 0.6; }
+}
+
+@keyframes spaceTwinkleB {
+    0%, 100% { opacity: 0.5; }
+    30% { opacity: 0.9; } /* Destella en otro punto del tiempo */
+    65% { opacity: 0.2; } /* Casi desaparece de forma sutil */
+    90% { opacity: 0.7; }
+}
+/* --- Contenedor Principal Ampliado (Ancho Cinemático) --- */
 main {
     width: 100%;
-    max-width: 1200px; 
+    max-width: 1050px; 
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: appleFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* --- CONFIGURACIÓN DE LOS NUEVOS BOTONES DE IMAGEN --- */
-
-header .corner-btn {
-    position: absolute;
-    top: 25px; /* Alineado con la altura de tu H1 */
-    display: inline-block;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    cursor: pointer;
-    z-index: 10;
+@keyframes appleFadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Posicionamiento individual */
-header .left-btn {
-    left: 20px;
+/* --- Cabeceras Globales --- */
+header {
+    width: 100%;
+    max-width: 1050px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
 }
 
-header .right-btn {
-    right: 20px;
+.split-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Control del tamaño de las imágenes cargadas */
-header .corner-btn img {
-    width: 32px;  /* Tamaño ideal para que parezcan iconos de interfaz */
-    height: 32px;
-    object-fit: contain;
-    /* Opacidad inicial ligera para que se mezclen bien con el degradado */
-    opacity: 0.8; 
-    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5));
+/* --- Concepto True North: Logotipo y Estrella Guía --- */
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.star-icon {
+    width: 44px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+.logo-section:hover .star-icon {
+    transform: rotate(90deg) scale(1.05);
+    filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+}
+
+.brand-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-top: 10px;
     transition: opacity 0.3s ease;
 }
 
-/* --- EFECTOS INTERACTIVOS (HOVER) --- */
-header .corner-btn:hover {
-    transform: scale(1.15); /* Se engrandece sutilmente al pasar el cursor */
+.brand-link:hover {
+    opacity: 0.85;
 }
 
-header .corner-btn:hover img {
-    opacity: 1; /* Brilla al 100% al interactuar */
-    filter: drop-shadow(0px 4px 10px rgba(181, 37, 126, 0.6)); /* Destello morado sutil */
-}
-
-/* --- Sección del Logo --- */
-.logo-section {
-    margin-top: 20px;    /* Reducido para subir el logotipo */
-    margin-bottom: 30px;  /* Ajustado sutilmente */
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    text-align: center;  
-}
-
-.logo-section h1 {
-    font-family: ciclo-display, sans-serif; 
-    font-style: normal;
-    font-weight: 900; 
-    font-size: 4rem; 
-    letter-spacing: -1px; 
-    color: #ffffff; 
-    margin-top: 10px;
-    text-transform: uppercase; 
-}
-
-/* --- Nuevo estilo para el enlace del título principal --- */
-.logo-section h1 .brand-link {
-    text-decoration: none;
-    color: #ffffff;
-    display: inline-block; /* Necesario para que la animación de escala funcione correctamente */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease;
-}
-
-/* --- Efecto Espacial al pasar el ratón (Hover) --- */
-.logo-section h1 .brand-link:hover {
-    /* Hace que el texto se engrandezca un 8% */
-    transform: scale(1.08); 
-    
-    /* Brillo espacial: capas de sombras de luz turquesa, azul y rosa que imitan una nebulosa */
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.9), 
-        0 0 20px rgba(24, 212, 233, 0.8),  /* Brillo Turquesa */
-        0 0 30px rgba(31, 111, 232, 0.6),  /* Brillo Azul */
-        0 0 40px rgba(181, 37, 126, 0.5); /* Destello Rosa */
-}
-
-/* --- Icono de Estrella (Logo) --- */
-.star-icon {
-    width: 110px;  /* Ajuste de tamaño idóneo para la cabecera */
-    height: 110px;
-    object-fit: contain;
-    margin-bottom: 5px;
-    display: inline-block;
-    
-    /* Transición fluida para el efecto de agrandado y luces */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
-    
-    /* Filtro base sutil para que se integre con el fondo */
-    filter: brightness(0.9) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
-}
-
-/* EFECTO INTERACTIVO: Iluminación de la estrella al hacer hover en el logo */
-.logo-section:hover .star-icon {
-    /* La estrella aumenta un 8% su tamaño en sintonía con el texto */
-    transform: scale(1.08);
-    
-    /* Usamos drop-shadow para que el aura de luz envuelva el contorno de tu estrella.
-       Mantiene la paleta de colores cósmicos de tu web: blanco, turquesa, azul y rosa */
-    filter: brightness(1)
-            drop-shadow(0 0 6px rgba(255, 255, 255, 0.9))
-            drop-shadow(0 0 12px rgba(24, 212, 233, 0.75))
-            drop-shadow(0 0 18px rgba(31, 111, 232, 0.55))
-            drop-shadow(0 0 25px rgba(181, 37, 126, 0.45));
-}
-
-/* --- Navegación --- */
+/* --- Menú de Navegación Abierto y Extendido --- */
 nav {
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     width: 100%;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    max-width: 800px;               
-    margin: 0 auto;
+    justify-content: center;
+    gap: 50px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 15px;
 }
 
-nav a, nav strong {
-    font-family: ciclo-display, sans-serif; 
-    text-transform: uppercase;              
-    font-size: 0.95rem;                     
-    letter-spacing: 1.5px;                  
+nav a {
+    color: #86868b;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 900;                       
-    padding: 6px 16px;                      
-    display: inline-block;
-    
-    /* MODIFICADO: Ajustamos la transición para que el cambio de escala y el text-shadow 
-       sean suaves y fluidos, idénticos a los del logo principal */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease, text-shadow 0.4s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* MODIFICADO: Efecto interactivo cósmico idéntico al logotipo principal */
 nav a:hover {
     color: #ffffff;
-    
-    /* Hace que el texto se engrandezca sutilmente al pasar el cursor (5%) */
-    transform: scale(1.05);
-    
-    /* Brillo de nebulosa espacial: Capas turquesa, azul y rosa */
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.9), 
-        0 0 15px rgba(24, 212, 233, 0.75),  /* Brillo Turquesa */
-        0 0 22px rgba(31, 111, 232, 0.55),  /* Brillo Azul */
-        0 0 30px rgba(181, 37, 126, 0.45); /* Destello Rosa */
 }
 
-/* Estado seleccionado (Fondo oscuro redondeado) */
 nav strong {
-    background-color: #1a191d;
     color: #ffffff;
-    border-radius: 14px;                    
-    
-    /* NUEVO: Un ligero brillo base en el botón seleccionado para denotar 
-       su importancia y mantener la atmósfera de iluminación de la web */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 15px rgba(181, 37, 126, 0.15);
+    font-size: 1rem;
+    font-weight: 600;
+    position: relative;
 }
 
-/* --- Botón de Imagen y Efectos --- */
-a.image-button {
-    display: block;
-    width: 100%;
-    max-width: 1200px; 
-    margin: 0 auto 35px auto;
-    text-decoration: none;
-    background: transparent;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    
-    /* NUEVO: Permite posicionar el texto de forma absoluta respecto al contenedor */
-    position: relative; 
-}
-
-.hero-image {
-    width: 100%; 
-    height: auto;             
-    aspect-ratio: 21 / 9;     
-    object-fit: cover; 
-    display: block;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
-    
-    transition: box-shadow 0.5s ease, filter 0.5s ease;
-    filter: brightness(1) contrast(1); 
-}
-
-a.image-button:hover {
-    transform: scale(1.015);
-}
-
-a.image-button:hover .hero-image {
-    /* Reducimos un poco más el brillo (de 0.8 a 0.5) al hacer hover 
-       para que el texto blanco destaque perfectamente y sea legible */
-    filter: brightness(0.5) contrast(1.05); 
-    
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 
-                0 0 20px rgba(255, 255, 255, 0.05), 
-                0 -5px 25px rgba(48, 38, 133, 0.15); 
-}
-
-/* NUEVO: Estilos para el texto superpuesto */
-.hover-text {
-    /* Tipografía acorde a los menús de tu página */
-    font-family: ciclo-display, sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    color: #ffffff;
-    
-    /* Centrado absoluto en medio del contenedor de la imagen */
+nav strong::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    
-    /* Estado inicial: Invisible */
-    opacity: 0;
-    pointer-events: none; /* Evita que interfiera con el cursor */
-    
-    /* Transición suave para la aparición y un leve efecto de escala */
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    
-    /* Sombra sutil para asegurar contraste con cualquier fondo */
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    bottom: -16px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #ffffff;
 }
 
-/* NUEVO: Mostrar el texto al pasar el ratón por el contenedor */
-a.image-button:hover .hover-text {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1); /* Sube ligeramente a su tamaño original */
-}
-
-/* --- Textos --- */
+/* --- Textos de Introducción Más Abiertos y Extendidos --- */
 .content-text {
-    font-size: 0.80rem;
-    line-height: 1.3;
+    text-align: justify;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #ceced2;
     width: 100%;
-    max-width: 1500px; 
-    color: rgba(255, 255, 255, 0.9);
-    margin: 0 auto 40px auto;
-    text-align: center; 
+    max-width: 950px; 
+    margin-bottom: 40px;
+    letter-spacing: -0.01em;
 }
 
-/* --- Bloque de Anuncio Importante (Index) --- */
+/* --- Caja de Anuncio de la Página Principal --- */
 .announcement-box {
-    width: 100%;
-    max-width: 800px; /* Al ser un aviso, se lee mejor si es un poco más estrecho */
-    margin: 30px auto 50px auto;
-    padding: 24px 30px;
-    background-color: rgba(26, 25, 29, 0.6); /* El mismo fondo oscuro de tus botones seleccionados */
-    border: 1px solid rgba(181, 37, 126, 0.3); /* Un borde fino con tu morado vibrante */
+    background-color: rgba(18, 18, 18, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 16px;
+    padding: 24px;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px); /* Efecto sutil de cristal esmerilado sobre el degradado */
+    width: 100%;
+    max-width: 950px;
+    margin-top: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-/* Pequeña etiqueta superior que dice "Notice" o "Important" */
 .announcement-badge {
-    font-family: ciclo-display, sans-serif; /* Mantiene la identidad de tu marca */
-    font-weight: 900;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #d6b4fc; /* Morado claro para dar contraste */
-    background: rgba(181, 37, 126, 0.2);
-    padding: 4px 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 4px 14px;
     border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     display: inline-block;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
 }
 
 .welcome-text {
-    /* Tipografía secundaria muy limpia y legible para comunicados profesionales */
-    font-family: forma-djr-deck, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.1rem; /* Ligeramente más pequeño que antes para que no compita con los títulos principales */
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 0;
+    font-size: 0.92rem;
+    color: #86868b;
+    line-height: 1.6;
 }
 
-/* --- Nueva Cabecera Distribución en Extremos --- */
-.split-header {
-    width: 100%;
-    max-width: 1200px;
-    padding: 25px 20px 10px 20px;
+/* --- Botón de Imagen de Sección Principal (Largo y Estilizado) --- */
+.image-button {
     display: block;
-    clear: both;
+    position: relative;
+    width: 100%;
+    max-width: 1000px; 
+    height: 380px; 
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 45px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: #000000;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.6s ease;
 }
 
-.header-left {
-    float: left;
+.hero-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; 
+    opacity: 0.75;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
 }
 
-.header-right {
-    float: right;
-    text-align: right;
-    display: flex; /* Alineación moderna en línea para los botones */
-    align-items: center;
-    gap: 30px; /* AUMENTADO: Espaciado generoso y elegante entre los dos iconos */
+.image-button:hover {
+    transform: scale(1.005);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Forzamos a que en esta pantalla los botones limpien el absoluto previo */
-.header-right .corner-btn {
-    position: relative !important; 
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    display: inline-block;
-    cursor: pointer;
-    z-index: 10;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+.image-button:hover .hero-image {
+    transform: scale(1.02);
+    opacity: 0.9;
 }
 
-/* Control del tamaño y opacidad de las imágenes de control */
-.header-right .corner-btn img {
-    width: 32px;  
-    height: 32px;
-    object-fit: contain;
-    opacity: 0.75; 
-    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.5));
-    transition: opacity 0.3s ease, filter 0.3s ease;
+.hover-text {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* --- EFECTOS INTERACTIVOS (HOVER Y CLICK) --- */
-.header-right .corner-btn:hover {
-    transform: scale(1.15); /* Se engrandece sutilmente al posar el cursor */
+.image-button:hover .hover-text {
+    background: #ffffff;
+    color: #000000;
 }
 
-.header-right .corner-btn:hover img {
-    opacity: 1; /* Brilla al 100% al interactuar */
-    filter: drop-shadow(0px 4px 12px rgba(181, 37, 126, 0.7)); /* Destello morado de marca */
+/* ==========================================================================
+   ESTILOS DE LAS PÁGINAS DE CONTENIDO (SHOWCASE / SECCIONES)
+   ========================================================================== */
+
+.showcase-container {
+    align-items: flex-start;
 }
 
-/* NUEVO: Comportamiento físico de botón real al hacer click */
-.header-right .corner-btn:active {
-    transform: scale(0.95); /* El botón se hunde sutilmente al presionarlo */
-}
-
-/* Icono Estrella de Navegación Izquierda */
 .star-icon-nav {
-    width: 70px; /* Ajustado para equilibrar visualmente con los botones derechos */
-    height: 70px;
-    object-fit: contain;
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
-    filter: brightness(0.9) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+    width: 28px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .logo-star-btn:hover .star-icon-nav {
-    transform: scale(1.1);
-    filter: brightness(1)
-            drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))
-            drop-shadow(0 0 15px rgba(24, 212, 233, 0.7));
+    transform: scale(1.08);
 }
 
-.logo-star-btn:active .star-icon-nav {
-    transform: scale(0.95);
+.section-title-courses {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+    align-self: flex-start;
 }
 
-/* --- Contenedor Principal del Carrusel --- */
-.showcase-container {
-    width: 100%;
-    max-width: 1300px;
-    margin-top: 60px;
-    padding: 0 40px;
-}
-
-/* Fila Desplazable Horizontalmente */
+/* Contenedor de Scroll Horizontal */
 .horizontal-scroll-wrapper {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
     width: 100%;
-    white-space: nowrap; /* Fuerza a todos los elementos a alinearse en una sola fila */
-    overflow-x: auto;    /* Habilita la barra de desplazamiento horizontal nativa */
-    overflow-y: hidden;
-    padding: 30px 10px;
-    
-    /* Configuración para un scroll fluido en trackpads y móviles */
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 15px;
+    margin-bottom: 50px;
 }
 
-/* Ocultar barra de desplazamiento visual para mantener la estética limpia */
-.horizontal-scroll-wrapper::-webkit-scrollbar {
-    height: 6px;
-}
-.horizontal-scroll-wrapper::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-}
-.horizontal-scroll-wrapper::-webkit-scrollbar-thumb {
-    background: rgba(181, 37, 126, 0.3);
-    border-radius: 10px;
-}
-
-/* --- Módulos de Tarjeta Individuales --- */
+/* Tarjetas de Cursos */
 .card-item {
-    display: inline-block; /* Permite la fila infinita horizontal */
-    width: 240px;          /* Ancho de cada botón rectangular */
-    margin-right: 25px;    /* Separación entre rectángulos */
-    vertical-align: top;
-    text-align: center;
+    flex: 0 0 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s ease;
 }
 
-/* --- El Botón Rectangular Interactiva (Actualizado con imagen trasera en Hover) --- */
+.card-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
 .rectangle-button {
     display: block;
-    width: 100%;
-    height: 200px;        
-    border-radius: 16px;
-    background-color: #ffffff; /* Fondo completamente blanco */
-    border: 3px solid #d63384; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    
-    /* Requerido para posicionar la imagen absoluta ::before por detrás */
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-/* Pseudo-elemento oculto que maneja la imagen en opacidad baja trasera */
-.rectangle-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Llama a la variable --bg-image definida de forma individual en el HTML */
+    height: 160px;
     background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    
-    /* Estado inicial: invisible y escala reducida */
-    opacity: 0;
-    transform: scale(1.1);
-    
-    /* Capa inferior interna para quedar por detrás del icono */
-    z-index: -1; 
-    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Contenedor interno para centrar el icono */
-.card-inner-bg {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent; 
-    z-index: 2; /* Asegura que el icono quede al frente */
-}
-
-/* Contenedor interno para centrar el nuevo icono */
-.card-inner-bg {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent; /* Mantiene el fondo blanco limpio */
-}
-
-/* Estilos para tu nuevo icono */
-.card-icon {
-    width: 60px;  /* Tamaño ajustado para que luzca equilibrado en el cuadro */
-    height: 60px;
-    object-fit: contain;
-    opacity: 0.9;
-    
-    /* FILTRO MÁGICO: Transforma el color NEGRO del icono original a un tono morado-rosado */
-    filter: invert(28%) sepia(85%) saturate(2410%) hue-rotate(312deg) brightness(89%) contrast(92%);
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-/* --- EFECTO INTERACTIVO HOVER (Actualizado) --- */
-.rectangle-button:hover {
-    transform: translateY(-8px); 
-    border-color: #e03391;       
-    box-shadow: 0 15px 30px rgba(214, 51, 132, 0.35), 0 0 15px rgba(214, 51, 132, 0.1);
-}
-
-/* EFECTO NUEVO: Al pasar el ratón, se muestra la imagen trasera en baja opacidad */
-.rectangle-button:hover::before {
-    opacity: 0.18; /* Opacidad baja ideal para mantener la legibilidad del icono y el fondo blanco */
-    transform: scale(1); /* Efecto suave de zoom hacia atrás */
-}
-
-/* --- ADAPTACIÓN DE HOVER PARA LAS TARJETAS DE VIDEO --- */
-.rectangle-button.video-card:hover {
-    border-color: #b78cf7; 
-    box-shadow: 0 15px 30px rgba(163, 112, 247, 0.35), 0 0 15px rgba(163, 112, 247, 0.1);
-}
-
-/* --- ADAPTACIÓN PARA LOS CUADROS DESACTIVADOS (Coming Soon) --- */
-/* Bloqueamos el pseudo-elemento en las tarjetas inactivas para que no muestren imagen */
-.rectangle-button.card-disabled::before,
-.rectangle-button.card-disabled:hover::before {
-    opacity: 0 !important;
-    display: none;
-}
-
-/* El icono reacciona ligeramente al pasar el cursor sobre el cuadro */
-.rectangle-button:hover .card-icon {
-    transform: scale(1.08); /* Crece sutilmente */
-    /* Mantiene el tono morado rosado con un toque extra de viveza en hover */
-    filter: invert(32%) sepia(90%) saturate(3000%) hue-rotate(312deg) brightness(95%) contrast(92%);
-}
-
-/* Texto debajo del rectángulo */
-.card-caption {
-    margin-top: 15px;
-    font-family: forma-djr-deck, sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    color: rgba(255, 255, 255, 0.75);
-    white-space: normal; 
-    transition: color 0.3s ease;
-}
-
-.card-item:hover .card-caption {
-    color: #ffffff; /* El texto se aclara al hacer hover */
-}
-
-/* --- NUEVO: Título para la sección de Cursos --- */
-.section-title-courses {
-    font-family: ciclo-display, sans-serif; /* Misma tipografía que el título principal */
-    font-style: normal;
-    font-weight: 900;
-    font-size: 2.5rem; /* Tamaño intermedio y balanceado */
-    letter-spacing: 1px;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-align: left; /* Alineado a la izquierda para enmarcar el inicio del carrusel */
-    width: 100%;
-    padding-left: 10px;
-    margin-bottom: 10px; /* Espaciado antes de que empiece el carrusel */
-    
-    /* Efecto de transición para el hover */
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease;
-}
-
-/* --- NUEVO: Línea divisoria de sección elegante --- */
-.section-divider-courses {
-    width: 100%;
-    height: 2px;
-    margin-top: 25px; /* Espacio con respecto a los textos de abajo de los rectángulos */
-    margin-bottom: 40px;
-    
-    /* Degradado lineal: El morado rosado de tu marca en el centro, desvaneciéndose hacia los extremos */
-    background: linear-gradient(
-        to right, 
-        rgba(181, 37, 126, 0) 0%, 
-        rgba(214, 51, 132, 0.8) 20%, 
-        rgba(214, 51, 132, 1) 50%, 
-        rgba(214, 51, 132, 0.8) 80%, 
-        rgba(181, 37, 126, 0) 100%
-    );
-    
-    /* Añade un sutil resplandor de fondo que acompaña la estética de luz de la web */
-    box-shadow: 0 0 8px rgba(214, 51, 132, 0.4);
-}
-
-/* --- NUEVO: Estilos para el estado "Coming Soon" en el último cuadro --- */
-
-/* Posicionamiento relativo necesario en el botón para contener la capa absoluta */
-.rectangle-button.card-disabled {
     position: relative;
-    cursor: default; /* Cambia el cursor a normal para indicar que no es interactivo */
+    text-decoration: none;
 }
 
-/* Capa oscura superpuesta */
-.overlay-coming-soon {
+.rectangle-button::before {
+    content: '';
     position: absolute;
-    top: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.45); 
+    backdrop-filter: blur(2px);    
+    -webkit-backdrop-filter: blur(2px);
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.rectangle-button:hover::before {
+    background: rgba(0, 0, 0, 0.3); 
+}
+
+/* Palabras más arriba y centradas en el cuadro */
+.card-inner {
+    position: absolute;
+    top: 0; 
     left: 0;
     width: 100%;
-    height: 100%;
-    
-    /* Fondo oscuro semi-transparente que opaca el blanco y el icono de abajo */
-    background-color: rgba(15, 14, 18, 0.75); 
-    
-    /* Centrado absoluto del texto utilizando Flexbox */
+    height: 100%; 
+    padding: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start;  
+    text-align: center;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    z-index: 2; 
+    background: transparent; 
+    padding-top: 25px; 
+}
+
+/* Grid de Redes Sociales */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.social-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    
-    /* Efecto de desenfoque de cristal esmerilado para suavizar lo que hay detrás */
-    backdrop-filter: blur(2px);
-    
-    z-index: 5;
-    transition: background-color 0.4s ease;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 14px 18px;
+    gap: 15px;
+    transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Texto "Coming Soon" */
-.overlay-coming-soon span {
-    font-family: forma-djr-deck, sans-serif; /* Tipografía secundaria limpia */
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #ffffff; /* Letras blancas para excelente contraste */
-    
-    /* Sombra de texto sutil para darle presencia */
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    
-    /* Un ligero toque del morado-rosado en el texto para que juegue con el marco */
-    border-bottom: 2px solid #d63384;
-    padding-bottom: 4px;
+.social-item:hover {
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* --- ANULACIÓN Y AJUSTE DE HOVER PARA EL CUADRO DESACTIVADO --- */
-
-/* Evitamos que este cuadro se eleve o cambie drásticamente en hover */
-.rectangle-button.card-disabled:hover {
-    transform: none; /* No se levanta hacia arriba */
-    border-color: #d63384; /* Mantiene el marco morado rosado original fijo */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Mantiene la sombra base */
-}
-
-/* Evitamos que el icono del fondo crezca o brille */
-.rectangle-button.card-disabled:hover .card-icon {
-    transform: none;
-    filter: invert(28%) sepia(85%) saturate(2410%) hue-rotate(312deg) brightness(89%) contrast(92%);
-    opacity: 0.5; /* Lo dejamos aún más opaco en este cuadro */
-}
-
-/* Efecto visual leve: la capa se oscurece un poco más si el usuario pasa el mouse */
-.rectangle-button.card-disabled:hover .overlay-coming-soon {
-    background-color: rgba(10, 9, 12, 0.85);
-}
-
-/* ================= ESTILOS PARA LA SECCIÓN DE VIDEOS ================= */
-
-/* Título de la sección Videos (Misma estructura que Courses) */
-.section-title-videos {
-    font-family: ciclo-display, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-align: left;
-    width: 100%;
-    padding-left: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease;
-}
-
-
-/* Modificación de marco para las tarjetas de video (Tono Morado-Violeta) */
-.rectangle-button.video-card {
-    border: 3px solid #a370f7; /* Tono ligeramente distinto al anterior */
-}
-
-.rectangle-button.video-card:hover {
-    border-color: #b78cf7; /* Brillo morado más claro en hover */
-    box-shadow: 0 15px 30px rgba(163, 112, 247, 0.35), 0 0 15px rgba(163, 112, 247, 0.1);
-}
-
-/* Filtro de color para el icono de la sección Videos */
-.card-icon.video-icon {
-    /* Convierte el icono negro original en un tono morado-violeta equilibrado con el marco */
-    filter: invert(53%) sepia(81%) saturate(1469%) hue-rotate(224deg) brightness(99%) contrast(98%);
-}
-
-.rectangle-button.video-card:hover .card-icon.video-icon {
-    /* Variación sutil de intensidad de color al interactuar */
-    filter: invert(60%) sepia(90%) saturate(2000%) hue-rotate(224deg) brightness(102%) contrast(98%);
-}
-
-/* --- ADAPTACIÓN DE "COMING SOON" PARA LA SECCIÓN DE VIDEOS --- */
-
-/* Mantiene el marco morado-violeta original fijo en el cuadro bloqueado de videos */
-.rectangle-button.video-card.card-disabled,
-.rectangle-button.video-card.card-disabled:hover {
-    border-color: #a370f7; /* Tono morado-violeta */
-    transform: none; /* Evita que se eleve en hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Sombra base estática */
-}
-
-/* Modifica el subrayado del texto "Coming Soon" dentro de videos para usar el color violeta */
-.overlay-video span {
-    border-bottom: 2px solid #a370f7;
-}
-
-/* Evita que el icono de Youtube crezca o cambie de color al pasar el mouse por encima */
-.rectangle-button.video-card.card-disabled:hover .card-icon.video-icon {
-    transform: none;
-    /* Mantiene el filtro del color de la sección videos pero con opacidad baja */
-    filter: invert(53%) sepia(81%) saturate(1469%) hue-rotate(224deg) brightness(99%) contrast(98%);
-    opacity: 0.5;
-}
-
-/* ================= ESTILOS PARA LA SECCIÓN DE REDES SOCIALES ================= */
-
-/* Título de la sección Social Media */
-.section-title-social {
-    font-family: ciclo-display, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-align: left;
-    width: 100%;
-    padding-left: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.4s ease;
-}
-
-
-/* Contenedor horizontal para las redes sociales */
-.social-media-wrapper {
-    width: 100%;
-    padding: 10px;
-    text-align: left; /* Alinea los bloques al inicio */
-    white-space: nowrap; /* Mantiene la fila horizontal si es necesario */
-    overflow-x: auto;
-}
-
-/* Cada bloque individual de red social */
-.social-item {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 40px; /* Espaciado generoso entre cuentas */
-    text-align: center; /* Centra el círculo y el texto */
-}
-
-/* El Botón Circular */
 .circle-button {
-    display: block;
-    width: 110px;       /* Tamaño de círculo perfecto y elegante */
-    height: 110px;
-    border-radius: 50%; /* Hace que el cuadro sea completamente redondo */
-    background-color: #ffffff; /* Fondo blanco pedido */
-    border: 3px solid #8fa4ff; /* Tono morado-azul claro distinto a los anteriores */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    margin: 0 auto 12px auto; /* Centra el círculo y deja espacio al texto inferior */
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    position: relative;
     overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Contenedor interno del círculo */
+.circle-button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    z-index: 1;
+}
+
 .circle-inner-bg {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background: transparent;
+    align-items: center;
+    position: relative;
+    z-index: 2;
 }
 
-/* Iconos dentro de los círculos */
 .social-icon {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    opacity: 0.9;
-    /* Filtro para transformar el icono negro a un tono azul morado suave que combine con el marco */
-    filter: invert(71%) sepia(35%) saturate(950%) hue-rotate(195deg) brightness(101%) contrast(101%);
-    transition: transform 0.3s ease, filter 0.3s ease;
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
 }
 
-/* Espacio de información debajo del círculo */
 .social-info {
-    white-space: normal; /* Permite que el texto se comporte normal */
+    display: flex;
+    flex-direction: column;
 }
 
 .social-platform {
-    font-family: forma-djr-deck, sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 2px;
+    font-size: 0.78rem;
+    color: #86868b;
 }
 
 .social-handle {
-    font-family: forma-djr-deck, sans-serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: #8fa4ff; /* El texto de la cuenta usa el color del marco */
-    transition: color 0.3s ease;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #ffffff;
 }
 
-/* Interacción Hover del Círculo */
-.circle-button:hover {
-    transform: scale(1.08) translateY(-4px); /* Se expande y se eleva levemente */
-    border-color: #b3c2ff; /* El marco brilla un poco más */
-    box-shadow: 0 12px 25px rgba(143, 164, 255, 0.35);
-}
-
-.circle-button:hover .social-icon {
-    transform: scale(1.1);
-    filter: invert(80%) sepia(40%) saturate(1200%) hue-rotate(195deg) brightness(105%) contrast(101%);
-}
-
-.social-item:hover .social-handle {
-    color: #ffffff; /* Al posar el mouse en el elemento, la cuenta se ilumina */
-}
-
-/* ================= SECCIÓN PERFIL ESTILO APPLE (GLASSMORPHISM) ================= */
-
-/* Contenedor principal de cristal */
-.apple-glass-card {
+/* Textos de contenido justificados a la izquierda dentro de cuadros */
+.showcase-container .content-text {
+    text-align: left; 
+    padding: 25px;
+    background: rgba(18, 18, 18, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    font-size: 1.05rem;
+    line-height: 1.7;
     width: 100%;
-    max-width: 1200px; /* Ocupa casi todo el largo de la página alineado con tu 'main' */
-    margin: 40px auto;
-    padding: 40px;
-    display: flex;
-    flex-direction: row; /* Distribución horizontal: imagen izquierda, contenido derecha */
-    align-items: center;
-    gap: 40px;
-    
-    /* Efecto Apple Glassmorphism */
-    background-color: rgba(15, 14, 18, 0.45); /* Color un poco más oscuro y translúcido */
-    backdrop-filter: blur(20px) saturate(160%); /* Distorsiona y embellece el fondo radial */
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    
-    /* Borde fino y elegante tipo cristal */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px; /* Esquinas redondeadas suaves estilo iOS */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    max-width: 1000px; 
 }
 
-/* Adaptación responsive para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
-    .apple-glass-card {
-        flex-direction: column; /* Se vuelve vertical en móviles */
-        padding: 25px;
-        text-align: center;
-    }
-}
-
-/* --- LADO IZQUIERDO: Contenedor del Círculo de Imagen --- */
-.profile-image-container {
-    flex-shrink: 0; /* Evita que el círculo se deforme */
+body > main > section {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
-.circular-avatar {
-    width: 180px;  /* Tamaño idóneo para la foto de perfil */
-    height: 180px;
-    border-radius: 50%; /* Cuadro completamente redondo */
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 3px solid rgba(214, 51, 132, 0.6); /* Borde sutil con el morado rosa de tu marca */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(181, 37, 126, 0.2);
-    overflow: hidden; /* Corta la imagen en forma de círculo */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s ease, border-color 0.4s ease;
-}
+/* ==========================================================================
+   PÁGINA DE USUARIO FIJADA (FLEXBOX SEGURO - SIN ABSOLUTES)
+   ========================================================================== */
 
-.circular-avatar:hover {
-    transform: scale(1.03);
-    border-color: #d63384; /* Se ilumina al pasar el cursor */
-}
-
-.circular-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Hace que cualquier imagen se adapte perfectamente al círculo */
-}
-
-/* --- LADO DERECHO: Título e Información --- */
-.profile-info-container {
-    flex-grow: 1; /* Ocupa todo el espacio restante a lo largo */
+/* Centrado perfecto del Logo en la Cabecera de Usuario */
+.user-page-header {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center; 
+    padding: 30px 0 10px 0;
 }
 
-/* Título de la sección con tipografía Ciclo */
-.glass-section-title {
-    font-family: ciclo-display, sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 2rem; /* Tamaño más pequeño que el H1 principal */
-    letter-spacing: 1px;
-    color: #ffffff;
-    text-transform: uppercase;
-    margin-bottom: 25px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Formulario contenedor de los inputs */
-.info-inputs-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+/* Reutiliza el comportamiento y escala global de la sección del logo */
+.user-page-header .logo-section {
+    margin-top: 50px;
+    margin-bottom: 30px;
     width: 100%;
 }
 
-.info-field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
+/* --- BLOQUE CONTENEDOR DEL AVATAR Y LOS RECTÁNGULOS --- */
+.user-avatar-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+    align-items: center !important; /* Centrado vertical perfecto mutuo */
+    gap: 40px !important;
+    width: 100% !important;
+    max-width: 950px !important;
+    margin: 40px 0 30px 0 !important;
 }
 
-.field-label {
-    font-family: forma-djr-deck, sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #d6b4fc; /* Tono morado claro para mantener tu identidad visual */
-    padding-left: 5px;
-}
-
-/* Rectángulos extendidos donde se introduce la información */
-.info-rectangle-input {
-    width: 100%;
-    min-height: 80px; /* Altura idónea para escribir varias líneas */
-    padding: 14px 18px;
-    background-color: rgba(0, 0, 0, 0.3); /* Fondo oscuro para contrastar con el cristal */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    
-    /* Estilos de Texto */
-    font-family: forma-djr-deck, sans-serif;
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: #ffffff;
-    line-height: 1.4;
-    
-    resize: vertical; /* Permite al usuario agrandar el cuadro hacia abajo si lo necesita */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-/* Efecto Focus al hacer click para escribir */
-.info-rectangle-input:focus {
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.45);
-    border-color: rgba(163, 112, 247, 0.6); /* Brillo violeta sutil al activarse */
-    box-shadow: 0 0 12px rgba(163, 112, 247, 0.2);
-}
-
-/* Botón de guardar integrado en el diseño */
-.save-glass-btn {
-    align-self: flex-end; /* Lo alinea a la derecha del contenedor */
-    font-family: ciclo-display, sans-serif;
-    font-weight: 900;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #ffffff;
-    background-color: rgba(214, 51, 132, 0.2);
-    border: 1.5px solid #d63384;
-    padding: 10px 24px;
-    border-radius: 12px;
+/* Círculo de Avatar a la Izquierda */
+.user-avatar-circle {
+    width: 150px !important;
+    height: 150px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15) !important;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 5px;
 }
 
-.save-glass-btn:hover {
-    background-color: rgba(214, 51, 132, 0.4);
-    transform: scale(1.03);
-    box-shadow: 0 0 15px rgba(214, 51, 132, 0.3);
+.user-avatar-circle:hover {
+    transform: scale(1.02);
 }
 
-.save-glass-btn:active {
-    transform: scale(0.97); /* Efecto físico de hundimiento al clickar */
+/* --- CONTENEDOR DE CONTADORES (SISTEMA GRID AUTO-AJUSTABLE) --- */
+.category-counters {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+    gap: 16px !important;
+    flex-grow: 1 !important; /* Toma de forma limpia todo el espacio restante derecho */
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
 }
 
-/* ================= LOGOTIPO ESCALADO PARA PÁGINAS SECUNDARIAS ================= */
-.logo-user-scaled {
-    margin-top: 15px;
-    margin-bottom: 15px;
+/* Estilo de los Rectángulos Etéreos Independientes */
+.category-stat {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding: 18px 20px !important;
+    border-radius: 14px !important;
+    color: #86868b !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+
+    /* Estética Etérea de Cristal Pulido Fino */
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
 }
 
-.logo-user-scaled .star-icon {
-    width: 65px; /* Reducido de 110px para que no rompa la estructura superior */
-    height: 65px;
+.category-stat:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-2px);
 }
 
-.logo-user-scaled h1 {
-    font-size: 2.2rem; /* Reducido de 4rem, compacto y elegante */
-    margin-top: 5px;
+.category-stat span {
+    font-size: 1.6rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    margin-top: 4px !important;
+    letter-spacing: -0.02em !important;
 }
 
-/* ================= BARRA DE PROGRESO ESTILO VIDRIO LÍQUIDO ================= */
+/* --- BARRA DE PROGRESO PREMIUM INFERIOR (REAJUSTADA Y VISIBLE) --- */
 .liquid-glass-progress-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto 10px auto;
-    padding: 24px 30px;
-    background-color: rgba(26, 25, 29, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    width: 100% !important;
+    max-width: 950px !important;
+    margin: 20px 0 40px 0 !important;
+    padding: 40px !important;
+    border-radius: 24px !important;
+    display: flex !important;
+    flex-direction: column !important; /* Alineación vertical interna */
+    
+    /* Estilo de Vidrio Esmerilado de Alto Brillo */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
 }
 
+/* La línea física de progreso en la parte superior del contenedor */
+.liquid-glass-track {
+    width: 100% !important;
+    height: 12px !important; /* Más robusta y grande */
+    background-color: rgba(255, 255, 255, 0.07) !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    margin-bottom: 18px !important; /* Espaciado directo con la info de abajo */
+}
+
+.liquid-glass-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #ffffff 0%, #f5f5f7 100%) !important; 
+    width: 0%; 
+    border-radius: 20px !important;
+    position: relative !important;
+    transition: width 0.9s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.liquid-glare {
+    position: absolute !important;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.3), transparent) !important;
+}
+
+/* Los Textos de información abajo de la barra física */
 .progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    font-size: 0.95rem !important;
 }
 
 .progress-title {
-    font-family: ciclo-display, sans-serif;
-    font-weight: 900;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #ffffff;
+    color: #86868b !important; 
+    font-weight: 500 !important;
 }
 
 .progress-badge {
-    font-family: forma-djr-deck, sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4px 12px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff !important;
+    font-weight: 600 !important;
 }
 
-/* El carril contenedor transparente/esmerilado */
-.liquid-glass-track {
-    width: 100%;
-    height: 22px; /* Espesor adecuado para apreciar el fluido líquido */
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 50px;
-    padding: 3px;
-    border: 1.5px solid rgba(255, 255, 255, 0.08);
-    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.8);
-    position: relative;
-    overflow: hidden;
-}
-
-/* El fluido líquido que avanza */
-.liquid-glass-fill {
-    height: 100%;
-    width: 0%; /* Cambia dinámicamente vía JavaScript */
-    border-radius: 50px;
-    background: linear-gradient(90deg, #b5257e, #d6b4fc); /* Tono por defecto */
-    box-shadow: 0 0 15px rgba(181, 37, 126, 0.5), inset 0 -4px 10px rgba(0,0,0,0.3);
-    position: relative;
-    transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
-}
-
-/* Reflejo de luz blanca superior en el líquido (Efecto Vidrio Líquido / Glare) */
-.liquid-glare {
-    position: absolute;
-    top: 1px;
-    left: 5%;
-    right: 5%;
-    height: 35%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
-    border-radius: 20px;
-}
-
-/* Bloque inferior de contadores detallados */
-.category-counters {
+/* Botones Auxiliares */
+.corner-btn {
     display: flex;
-    gap: 25px;
-    margin-top: 15px;
-    justify-content: flex-start;
-}
-
-.counter-tag {
-    font-family: forma-djr-deck, sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Colores de etiquetas consistentes con los marcos de tus secciones */
-.text-health strong { color: #d63384; }
-.text-professional strong { color: #a370f7; }
-.text-finance strong { color: #8fa4ff; }
-
-/* Asegura que la imagen de fondo cubra todo el círculo y esté centrada */
-.circle-button {
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    cursor: pointer; /* Muestra la mano al pasar el mouse */
-}
-
-/* Contenedor para centrar el avatar en tu panel */
-.profile-avatar-container {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    margin: 30px 0; /* Espaciado arriba y abajo del círculo */
-}
-
-/* El nuevo círculo de usuario (Más grande y responsivo) */
-.user-avatar-circle {
-    width: 150px;  /* Ancho fijo */
-    height: 150px; /* Alto idéntico para asegurar el círculo perfecto */
+    justify-content: center;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    
-    /* Evita que el contenedor colapse o se estire en contenedores flex */
-    flex-shrink: 0; 
-
-    /* Configuración de la imagen de fondo */
-    background-image: var(--bg-image);
-    background-size: cover;       /* Fuerza a la imagen a cubrir el círculo sin deformarse */
-    background-position: center;  /* Centra la imagen */
-    background-repeat: no-repeat;
-    
-    /* Para centrar el icono de usuario temporal (img) si cayera dentro */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Corta cualquier excedente en forma de círculo */
-    
-    /* Estilos estéticos de tu diseño */
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 15px rgba(181, 37, 126, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.5);
-    
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Si tienes una etiqueta <img> dentro del botón de avatar, añade esto para que no se deforme */
-.user-avatar-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Evita que la foto se estire vertical u horizontalmente */
+.corner-btn:hover {
+    background-color: #1e1e1f;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.corner-btn img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
 }

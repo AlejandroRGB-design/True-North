@@ -7,163 +7,97 @@
 </head>
 <body>
 
-    <!-- Cabecera Superior: Logotipo reducida de tamaño con estilo original -->
     <header class="user-page-header">
-        <section class="logo-section logo-user-scaled">
+        <section class="logo-section">
             <img src="Photos/vintage star.png" alt="True North Star" class="star-icon">
             <h1><a href="index.html" class="brand-link">True North</a></h1>
         </section>
     </header>
 
     <main>
-        <!-- ================= BARRA DE PROGRESO VIDRIO LÍQUIDO ================= -->
+        <div class="user-avatar-container">
+            <div id="avatar-button" class="user-avatar-circle" style="--bg-image: url('Photos/user icon.png');"></div>
+            <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+
+            <div class="category-counters">
+                <div class="category-stat">Health Clicks <span id="clicks-health">0</span></div>
+                <div class="category-stat">Skills Clicks <span id="clicks-skills">0</span></div>
+                <div class="category-stat">Finance Clicks <span id="clicks-finance">0</span></div>
+            </div>
+        </div>
+
         <section class="liquid-glass-progress-container">
+            <div class="liquid-glass-track">
+                <div id="liquid-progress-fill" class="liquid-glass-fill">
+                    <div class="liquid-glare"></div> </div>
+            </div>
+            
             <div class="progress-header">
                 <span class="progress-title">Progress Bar</span>
                 <span id="progress-percentage-text" class="progress-badge">0%</span>
             </div>
-            
-            <!-- Estructura de la Barra de Vidrio Líquido con Resplandor -->
-            <div class="liquid-glass-track">
-                <div id="liquid-progress-fill" class="liquid-glass-fill">
-                    <div class="liquid-glare"></div> <!-- Reflejo brillante superior -->
-                </div>
-            </div>
-
-            <!-- Desglose de interacciones por categoría -->
-            <div class="category-counters">
-                <span class="counter-tag text-health">Health: <strong id="count-health">0</strong></span>
-                <span class="counter-tag text-professional">Professional skills: <strong id="count-professional">0</strong></span>
-                <span class="counter-tag text-finance">Finance: <strong id="count-finance">0</strong></span>
-            </div>
-        </section>
-
-        <!-- Contenedor Principal estilo Apple Glassmorphism (Tu bloque anterior) -->
-        <section class="apple-glass-card">
-           <div class="profile-avatar-container">
-    <button id="avatar-button" class="user-avatar-circle" title="Cambiar foto de perfil">
-        <img src="Photos/user icon.png" alt="Avatar" id="avatar-img-fallback" style="display: none;">
-    </button>
-    <input type="file" id="avatar-input" accept="image/*" style="display: none;">
-    </button>
-</div>
-
-            <div class="profile-info-container">
-                <h2 class="glass-section-title">User Information</h2>
-                
-                <form class="info-inputs-form">
-                    <div class="info-field-group">
-                        <label for="info-field-1" class="field-label">About you</label>
-                        <textarea id="info-field-1" class="info-rectangle-input" placeholder="Escribe aquí tu información médica o notas personales..."></textarea>
-                    </div>
-
-                    <div class="info-field-group">
-                        <label for="info-field-2" class="field-label">Description</label>
-                        <textarea id="info-field-2" class="info-rectangle-input" placeholder="Escribe aquí datos adicionales relevantes..."></textarea>
-                    </div>
-                    
-                    <button type="button" class="save-glass-btn" onclick="saveData()">Save Data</button>
-                </form>
-            </div>
         </section>
     </main>
 
-    <!-- SCRIPT DE ACTUALIZACIÓN EN TIEMPO REAL Y LOCALSTORAGE -->
-    <script>
-        function saveData() {
-            const info1 = document.getElementById('info-field-1').value;
-            const info2 = document.getElementById('info-field-2').value;
-            localStorage.setItem('trueNorth_info1', info1);
-            localStorage.setItem('trueNorth_info2', info2);
-            alert('¡Información guardada con éxito de forma local!');
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Cargar contadores individuales desde localStorage (¡CLAVES CORREGIDAS!)
+        const clicksHealth = parseInt(localStorage.getItem('tn_clicks_health') || '0');
+        const clicksSkills = parseInt(localStorage.getItem('tn_clicks_skills') || '0'); // <-- ¡CORREGIDO AQUÍ! Ahora lee la clave correcta de skills
+        const clicksFinance = parseInt(localStorage.getItem('tn_clicks_finance') || '0');
+
+        // Asignar los valores a los cuadros independientes correspondientes
+        document.getElementById('clicks-health').textContent = clicksHealth;
+        document.getElementById('clicks-skills').textContent = clicksSkills;
+        document.getElementById('clicks-finance').textContent = clicksFinance;
+
+        // 2. Lógica de cálculo de la Barra de Progreso Mínima/Máxima
+        const totalClicks = clicksHealth + clicksSkills + clicksFinance;
+        const maxClicksTarget = 30; // Tu meta de clicks original
+        
+        // Calcular porcentaje asegurando que no pase del 100%
+        let percentage = Math.min(Math.round((totalClicks / maxClicksTarget) * 100), 100);
+
+        // 3. ACTUALIZACIÓN DE LA BARRA VISUAL (Diseño Premium Apple)
+        const progressFill = document.getElementById('liquid-progress-fill');
+        const percentageText = document.getElementById('progress-percentage-text');
+
+        if (progressFill && percentageText) {
+            // Animación fluida al cargar la página
+            setTimeout(() => {
+                progressFill.style.width = percentage + '%';
+                percentageText.textContent = percentage + '%';
+            }, 150);
         }
 
-        // Función dinámica para calcular clics y actualizar la barra reflectante
-        function updateLiquidProgressBar() {
-            // Obtener clics acumulados desde las páginas de showcase o inicializar en 0
-            const healthClicks = parseInt(localStorage.getItem('tn_clicks_health') || '0');
-            const profClicks = parseInt(localStorage.getItem('tn_clicks_professional') || '0');
-            const financeClicks = parseInt(localStorage.getItem('tn_clicks_finance') || '0');
+        // 4. Lógica de persistencia de la Foto de Perfil (Avatar)
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarButton = document.getElementById('avatar-button');
 
-            // Renderizar los contadores individuales en las etiquetas
-            document.getElementById('count-health').innerText = healthClicks;
-            document.getElementById('count-professional').innerText = profClicks;
-            document.getElementById('count-finance').innerText = financeClicks;
+        const savedAvatar = localStorage.getItem('user_avatar');
+        if (savedAvatar && avatarButton) {
+            avatarButton.style.setProperty('--bg-image', `url(${savedAvatar})`);
+        }
 
-            // Calcular el progreso total. Supongamos una meta inicial de 30 clics totales para el 100%
-            const totalClicks = healthClicks + profClicks + financeClicks;
-            const targetGoal = 30; 
-            let percentage = Math.min(Math.round((totalClicks / targetGoal) * 100), 100);
+        if (avatarButton && avatarInput) {
+            avatarButton.addEventListener('click', function() {
+                avatarInput.click();
+            });
 
-            // Actualizar elementos visuales en tiempo real
-            document.getElementById('progress-percentage-text').innerText = percentage + '%';
-            
-            const fillElement = document.getElementById('liquid-progress-fill');
-            fillElement.style.width = percentage + '%';
-
-            // Cambiar dinámicamente el color del líquido reflectante basado en qué categoría domina
-            if (totalClicks > 0) {
-                if (healthClicks >= profClicks && healthClicks >= financeClicks) {
-                    fillElement.style.background = "linear-gradient(90deg, #d63384, #e03391)";
-                    fillElement.style.boxShadow = "0 0 20px rgba(214, 51, 132, 0.6), inset 0 -4px 10px rgba(0,0,0,0.3)";
-                } else if (profClicks >= healthClicks && profClicks >= financeClicks) {
-                    fillElement.style.background = "linear-gradient(90deg, #a370f7, #b78cf7)";
-                    fillElement.style.boxShadow = "0 0 20px rgba(163, 112, 247, 0.6), inset 0 -4px 10px rgba(0,0,0,0.3)";
-                } else {
-                    fillElement.style.background = "linear-gradient(90deg, #8fa4ff, #b3c2ff)";
-                    fillElement.style.boxShadow = "0 0 20px rgba(143, 164, 255, 0.6), inset 0 -4px 10px rgba(0,0,0,0.3)";
+            avatarInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const base64Image = event.target.result;
+                        avatarButton.style.setProperty('--bg-image', `url(${base64Image})`);
+                        localStorage.setItem('user_avatar', base64Image);
+                    };
+                    reader.readAsDataURL(file);
                 }
-            }
+            });
         }
-
-        window.onload = function() {
-            if(localStorage.getItem('trueNorth_info1')) {
-                document.getElementById('info-field-1').value = localStorage.getItem('trueNorth_info1');
-            }
-            if(localStorage.getItem('trueNorth_info2')) {
-                document.getElementById('info-field-2').value = localStorage.getItem('trueNorth_info2');
-            }
-            // Ejecutar la renderización de la barra líquida al cargar
-            updateLiquidProgressBar();
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-    const avatarInput = document.getElementById('avatar-input');
-    const avatarButton = document.getElementById('avatar-button');
-
-    // 1. Cargar la foto guardada en el navegador si ya existe
-    const savedAvatar = localStorage.getItem('user_avatar');
-    if (savedAvatar) {
-        avatarButton.style.setProperty('--bg-image', `url(${savedAvatar})`);
-    }
-
-    // 2. Al hacer clic en el círculo, abrir el explorador de archivos
-    if (avatarButton && avatarInput) {
-        avatarButton.addEventListener('click', function() {
-            avatarInput.click();
-        });
-
-        // 3. Cuando seleccionas el archivo de tu computadora o celular
-        avatarInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                
-                reader.onload = function(event) {
-                    const base64Image = event.target.result;
-                    
-                    // Cambiar el fondo del círculo inmediatamente
-                    avatarButton.style.setProperty('--bg-image', `url(${base64Image})`);
-                    
-                    // Guardar la imagen de forma permanente en localStorage
-                    localStorage.setItem('user_avatar', base64Image);
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-});
+    });
     </script>
 </body>
 </html>

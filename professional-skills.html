@@ -57,8 +57,9 @@
     <script>
     document.querySelectorAll('.rectangle-button, .circle-button').forEach(element => {
         element.addEventListener('click', () => {
-            let clicks = parseInt(localStorage.getItem('tn_clicks_health') || '0');
-            localStorage.setItem('tn_clicks_health', clicks + 1);
+            // Corregido: Ahora usa la clave 'tn_clicks_skills' en lugar de health
+            let clicks = parseInt(localStorage.getItem('tn_clicks_skills') || '0');
+            localStorage.setItem('tn_clicks_skills', clicks + 1);
         });
     });
 </script>
